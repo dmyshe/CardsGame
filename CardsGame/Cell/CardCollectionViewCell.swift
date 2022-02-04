@@ -36,7 +36,7 @@ class CardCollectionViewCell: UICollectionViewCell {
         self.card = card
         frontImageView.image = UIImage(named: card.imageName)
         
-        if card.isMatched == true {
+        if card.isMatched  {
             backImageView.alpha = 0
             frontImageView.alpha = 0
             return
@@ -44,8 +44,8 @@ class CardCollectionViewCell: UICollectionViewCell {
             backImageView.alpha = 1
             frontImageView.alpha = 1
         }
-        
-        if card.isFlipped == true {
+
+        if card.isFlipped  {
             flipUp(speed: 0)
         } else {
             flipDown(speed: 0, delay: 0)
@@ -59,11 +59,15 @@ class CardCollectionViewCell: UICollectionViewCell {
         card?.isFlipped = true
     }
     
-    func flipDown(speed:TimeInterval = 0.3, delay:TimeInterval = 0.5) {
+    func flipDown(speed: TimeInterval = 0.3, delay: TimeInterval = 0.5) {
         card?.isFlipped = false
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
-            UIView.transition(from: self.frontImageView, to: self.backImageView, duration: speed, options: [.showHideTransitionViews,.transitionFlipFromLeft], completion: nil)
+            UIView.transition(from: self.frontImageView,
+                              to: self.backImageView,
+                              duration: speed,
+                              options: [.showHideTransitionViews,.transitionFlipFromLeft],
+                              completion: nil)
         }
     }
     

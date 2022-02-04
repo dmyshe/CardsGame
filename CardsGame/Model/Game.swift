@@ -1,8 +1,8 @@
 import Foundation
 
 class Game {
-    var round = 0
+    var round = 1
     var scores = 0
-    var restartGame = false
-    var isWin = false
+    var numberOfCards = 4
+    var cardsArray = [Card]()
 }

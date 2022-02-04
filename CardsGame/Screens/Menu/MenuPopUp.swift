@@ -5,10 +5,14 @@ import UIKit
 
 class MenuPopUp: UIView {
     
+    var viewModel = GameViewModel()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Настройки"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.text = LocalizeStrings.MenuPopUP.menu
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -64,19 +68,21 @@ class MenuPopUp: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     @objc func continueGame() {
         animateOut()
     }
     
     @objc func restartRound() {
-        
+        animateOut()
+        viewModel.createNewRound()
     }
-    
-    
-    
+
     private func animateOut() {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 1, options: .curveEaseIn,
+                       animations: {
             self.container.transform = CGAffineTransform(translationX: 0, y:  -self.frame.height)
             self.alpha = 0
         }) { complete in
@@ -90,15 +96,20 @@ class MenuPopUp: UIView {
         self.container.transform = CGAffineTransform(translationX: 0, y:  -self.frame.height)
         self.alpha = 1
         
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 1,
+                       options: .curveEaseIn, animations: {
             self.container.transform = .identity
             self.alpha = 1
         })
     }
     
     private func setupUserInterface() {
-        self.addSubview(container)
+        addSubview(container)
         container.addSubview(buttonStack)
+        container.addSubview(titleLabel)
     }
     
     private func makeConstraints() {
@@ -108,10 +119,14 @@ class MenuPopUp: UIView {
             container.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
             container.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.45),
             
-            buttonStack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant:  8),
-            buttonStack.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  -8),
-            buttonStack.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-            buttonStack.heightAnchor.constraint(equalToConstant: 100)
+            titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.UI.Layout.defaultPadding),
+            titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+
+            buttonStack.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            buttonStack.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            buttonStack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant:  Constants.UI.Layout.defaultOffset),
+            buttonStack.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  -Constants.UI.Layout.defaultOffset),
+            buttonStack.heightAnchor.constraint(equalToConstant: Constants.UI.Layout.buttonStackHeight)
         ])
     }
 }

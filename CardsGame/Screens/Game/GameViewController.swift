@@ -9,22 +9,11 @@ class GameViewController: UIViewController {
     // MARK: Views
     private lazy var spinner = UIActivityIndicatorView()
     
-    private lazy  var progressView: UIProgressView = {
-        let progressView = UIProgressView(progressViewStyle: .bar)
-        progressView.trackTintColor = .red
-        progressView.progressTintColor = .systemBlue
-        progressView.setProgress(0, animated: false)
-        progressView.isHidden = true
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        return progressView
-    }()
-    
     private lazy var backButton: UIBarButtonItem = {
         var button = UIBarButtonItem(image: Constants.UI.Image.leftArrow,
                                      style: .plain,
                                      target: navigationController,
                                      action: #selector(UINavigationController.popViewController(animated:)))
-        
         return button
     }()
     
@@ -32,7 +21,7 @@ class GameViewController: UIViewController {
         var button = UIBarButtonItem(image: Constants.UI.Image.gear,
                                      style: .plain,
                                      target: self,
-                                     action: #selector(openSettings))
+                                     action: #selector(openMenu))
         button.customView?.isHidden = true
         return button
     }()
@@ -54,8 +43,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         setupUserInterface()
         makeConstraints()
-        viewModel.generateCardsForGame()
-        
+        viewModel.createNewRound()
+        viewModel.delegate = self
         spinner.style = .large
         spinner.startAnimating()
     }
@@ -66,24 +55,22 @@ class GameViewController: UIViewController {
             self.spinner.hidesWhenStopped = true
             self.spinner.stopAnimating()
             self.collectionView.isHidden = false
+            self.title = "\(self.viewModel.game.round)/3"
             self.navigationItem.rightBarButtonItem = self.settingsButton
         }
-        
     }
     
-    @objc func openSettings() {
+    @objc func openMenu() {
         let controller = MenuPopUp()
         view.addSubview(controller)
     }
     
-    private func setupUserInterface() {        
+    private func setupUserInterface() {
         view.backgroundColor = .systemGray6
+
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = nil
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
-       
-        view.addSubview(progressView)
-        navigationItem.titleView = progressView
+        
         view.addSubview(spinner)
         view.addSubview(collectionView)
     }
@@ -93,7 +80,7 @@ class GameViewController: UIViewController {
         NSLayoutConstraint.activate([
             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-
+            
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.UI.Layout.defaultPadding),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.UI.Layout.defaultPadding),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.UI.Layout.defaultPadding),
@@ -105,15 +92,15 @@ class GameViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 extension GameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.cardsArray.count
+        viewModel.game.cardsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCollectionViewCell.identifier, for: indexPath) as! CardCollectionViewCell
-
-        let card = viewModel.cardsArray[indexPath.row]
+        
+        let card = viewModel.game.cardsArray[indexPath.row]
         cell.configureCell(card: card)
-
+        
         return cell
     }
 }
@@ -123,35 +110,58 @@ extension GameViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell
-    
+        
         if cell?.card?.isFlipped == false && cell?.card?.isMatched == false {
             cell?.flipUp()
-
+            
             if viewModel.firstFlippedCardIndex == nil {
-                viewModel.firstFlippedCardIndex = indexPath
+                viewModel.firstFlippedCardIndex = indexPath.row
             } else {
-                viewModel.checkForMatch(indexPath, in: collectionView)
+                viewModel.checkForMatch(indexPath.row)
             }
+            
         }
     }
 }
 
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension  GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-          return CGSize(width: 150, height: 150)
-       }
+        return CGSize(width: Constants.UI.Layout.collectionViewCellWidth,
+                      height: Constants.UI.Layout.collectionViewCellHeight)
+    }
 }
 
-// MARK: UIGestureRecognizerDelegate
-extension GameViewController:  UIGestureRecognizerDelegate {
+// MARK: GameViewModelDelegate
+extension GameViewController: GameViewModelDelegate {
+    
+    func reloadData() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func cardFlipDown() {
+        if let  firstFlippedCardIndex = viewModel.firstFlippedCardIndex,
+           let secondFlippedCardIndex = viewModel.secondFlippedCardIndex,
+           let cardOneCell = collectionView.cellForItem(at: IndexPath(row: firstFlippedCardIndex, section: 0)) as? CardCollectionViewCell,
+           let cardTwoCell = collectionView.cellForItem(at: IndexPath(row: secondFlippedCardIndex, section: 0)) as? CardCollectionViewCell {
+            
+            cardOneCell.flipDown()
+            cardTwoCell.flipDown()
+        }
+    }
+    
+    func removeCard() {
+        if let  firstFlippedCardIndex = viewModel.firstFlippedCardIndex,
+           let secondFlippedCardIndex = viewModel.secondFlippedCardIndex,
+           let cardOneCell = collectionView.cellForItem(at: IndexPath(row: firstFlippedCardIndex, section: 0)) as? CardCollectionViewCell,
+           let cardTwoCell = collectionView.cellForItem(at: IndexPath(row: secondFlippedCardIndex, section: 0)) as? CardCollectionViewCell {
+            
+            cardOneCell.remove()
+            cardTwoCell.remove()
+        }
+    }
     
 }
 
-
-extension GameViewController: GameViewModelDelegate {
-    func reloadData() {
-        collectionView.reloadData()
-    }
-}

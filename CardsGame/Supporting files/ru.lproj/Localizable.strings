@@ -3,3 +3,5 @@
 "playAgain_text" = "Играть снова";
 "continue_text" = "Продолжить";
 "restart_text" = "Начать заново";
+"menu_text" = "Меню";
+"cards_title" = "CARDS";
