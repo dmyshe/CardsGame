@@ -7,7 +7,11 @@ class GameViewController: UIViewController {
     var viewModel = GameViewModel()
     
     // MARK: Views
-    private lazy var spinner = UIActivityIndicatorView()
+    private lazy var spinner: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.hidesWhenStopped = true
+        return activityIndicatorView
+    }()
     
     private lazy var backButton: UIBarButtonItem = {
         var button = UIBarButtonItem(image: Constants.UI.Image.leftArrow,
@@ -52,7 +56,6 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.spinner.hidesWhenStopped = true
             self.spinner.stopAnimating()
             self.collectionView.isHidden = false
             self.title = self.viewModel.setTitle
@@ -62,6 +65,7 @@ class GameViewController: UIViewController {
     
     @objc func openMenu() {
         let controller = MenuPopUp()
+        controller.delegate = self
         view.addSubview(controller)
     }
     
@@ -117,7 +121,8 @@ extension GameViewController: UICollectionViewDelegate {
             if viewModel.firstFlippedCardIndex == nil {
                 viewModel.firstFlippedCardIndex = indexPath.row
             } else {
-                viewModel.checkForMatch(indexPath.row)
+                viewModel.secondFlippedCardIndex = indexPath.row
+                viewModel.checkForMatch()
             }
         }
     }
@@ -134,15 +139,27 @@ extension  GameViewController: UICollectionViewDelegateFlowLayout {
 // MARK: GameViewModelDelegate
 extension GameViewController: GameViewModelDelegate {
     
+    func restartLevel() {
+        self.spinner.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.collectionView.reloadData()
+        }
+    }
+    
     func showGameOverPopup() {
         let controller = GameOverPopup()
         view.addSubview(controller)
     }
     
     func reloadData() {
+        collectionView.isHidden = true
+        spinner.isHidden = false
+        spinner.startAnimating()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.title = self.viewModel.setTitle
             self.collectionView.reloadData()
+            self.spinner.stopAnimating()
+            self.collectionView.isHidden = false
         }
     }
     
@@ -168,5 +185,13 @@ extension GameViewController: GameViewModelDelegate {
         }
     }
     
+}
+
+// MARK: MenuPopUpDelegate
+extension GameViewController: MenuPopUpDelegate {
+    func restartRound() {
+        viewModel.createNewRound()
+        reloadData()
+    }
 }
 

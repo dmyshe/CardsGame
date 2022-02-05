@@ -5,6 +5,7 @@ protocol GameViewModelDelegate: AnyObject {
     func cardFlipDown()
     func removeCard()
     func showGameOverPopup()
+    func restartLevel() 
 }
 
 class GameViewModel {
@@ -23,10 +24,9 @@ class GameViewModel {
         game.cardsArray.shuffle()
     }
     
-    func checkForMatch(_ secondFlippedCardIndex: Int) {
+    func checkForMatch() {
         guard let firstFlippedCard = firstFlippedCardIndex else { return }
-        self.secondFlippedCardIndex = secondFlippedCardIndex
-        guard let secondFlippedCard = self.secondFlippedCardIndex else { return }
+        guard let secondFlippedCard = secondFlippedCardIndex else { return }
 
         let cardOne = game.cardsArray[firstFlippedCard]
         let cardTwo = game.cardsArray[secondFlippedCard]
@@ -40,13 +40,13 @@ class GameViewModel {
             if remainedCards.isEmpty {
                 checkForGameOver()
             }
-        }
-        else {
+        } else {
             cardOne.isFlipped = false
             cardTwo.isFlipped = false
             delegate?.cardFlipDown()
+            self.firstFlippedCardIndex = nil
+            self.secondFlippedCardIndex = nil
         }
-        self.firstFlippedCardIndex = nil
     }
 
     func checkForGameOver() {

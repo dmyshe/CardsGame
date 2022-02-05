@@ -1,10 +1,14 @@
 import Foundation
 import UIKit
 
+protocol MenuPopUpDelegate: AnyObject {
+    func restartRound()
+}
+
 class MenuPopUp: UIView {
     
-    var viewModel = GameViewModel()
-    
+    weak var delegate: MenuPopUpDelegate?
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = LocalizeStrings.MenuPopUP.menu
@@ -64,7 +68,7 @@ class MenuPopUp: UIView {
     
     @objc func restartRound() {
         animateOut()
-        viewModel.createNewRound()
+        delegate?.restartRound()
     }
 
     private func animateOut() {
