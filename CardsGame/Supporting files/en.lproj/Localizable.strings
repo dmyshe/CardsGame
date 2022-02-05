@@ -5,3 +5,5 @@
 "restart_text" = "Restart";
 "menu_text" = "Menu";
 "cards_title" = "CARDS";
+"congratulations_text" = "Whoo! You won the game!😎";
+"backToStartController" = "Go back to the home screen";

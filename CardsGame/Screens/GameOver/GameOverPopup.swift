@@ -1,33 +1,27 @@
 import Foundation
 import UIKit
 
-class MenuPopUp: UIView {
+class GameOverPopup: UIView {
     
     var viewModel = GameViewModel()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = LocalizeStrings.MenuPopUP.menu
+        label.text = LocalizeStrings.GameOverPopup.congratulations
         label.textColor = .black
+        label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var continueButton:  UIButton = {
-        let button = CustomButton(title: LocalizeStrings.MenuPopUP.continueText)
-        button.addTarget(self, action: #selector(continueGame), for: .touchUpInside)
+    private lazy var backButton:  UIButton = {
+        let button = CustomButton(title: LocalizeStrings.GameOverPopup.backToStartController)
+        button.addTarget(self, action: #selector(backToStartController), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private lazy var restartButton:  UIButton = {
-        let button = CustomButton(title: LocalizeStrings.MenuPopUP.restart)
-        button.addTarget(self, action: #selector(restartRound), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
+
     private lazy var container : UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -37,7 +31,7 @@ class MenuPopUp: UIView {
     }()
     
     private lazy var buttonStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [continueButton,restartButton])
+        let stack = UIStackView(arrangedSubviews: [backButton])
         stack.spacing = Constants.UI.Layout.defaultPadding
         stack.axis = .vertical
         stack.distribution = .fillEqually
@@ -51,20 +45,15 @@ class MenuPopUp: UIView {
         self.frame = UIScreen.main.bounds
         setupUserInterface()
         makeConstraints()
-        animateIn() 
+        animateIn()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func continueGame() {
+    @objc func backToStartController() {
         animateOut()
-    }
-    
-    @objc func restartRound() {
-        animateOut()
-        viewModel.createNewRound()
     }
 
     private func animateOut() {
@@ -111,7 +100,9 @@ class MenuPopUp: UIView {
             
             titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.UI.Layout.defaultPadding),
             titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-
+            titleLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant:  Constants.UI.Layout.defaultOffset),
+            titleLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  Constants.UI.Layout.defaultOffset),
+            
             buttonStack.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             buttonStack.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             buttonStack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant:  Constants.UI.Layout.defaultOffset),

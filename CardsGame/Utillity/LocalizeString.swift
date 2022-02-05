@@ -18,6 +18,11 @@ enum LocalizeStrings {
         static let continueText = "continue_text".localized()
         static let restart = "restart_text".localized()
         static let menu = "menu_text".localized()
+    }
+    
+    enum GameOverPopup {
+        static let congratulations = "congratulations_text".localized()
+        static let backToStartController = "backToStartController".localized()
 
     }
 }

@@ -119,7 +119,6 @@ extension GameViewController: UICollectionViewDelegate {
             } else {
                 viewModel.checkForMatch(indexPath.row)
             }
-            
         }
     }
 }
@@ -134,6 +133,11 @@ extension  GameViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: GameViewModelDelegate
 extension GameViewController: GameViewModelDelegate {
+    
+    func showGameOverPopup() {
+        let controller = GameOverPopup()
+        view.addSubview(controller)
+    }
     
     func reloadData() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {

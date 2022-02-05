@@ -22,6 +22,7 @@
 		322F5D3227AB2EF0007D3021 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F5D3127AB2EF0007D3021 /* Constants.swift */; };
 		3258C6D127AD6A4A005C3461 /* MenuPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3258C6D027AD6A4A005C3461 /* MenuPopUp.swift */; };
 		327478B227AE4CDE0094EF40 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327478B127AE4CDE0094EF40 /* CustomButton.swift */; };
+		327478B527AE5C3F0094EF40 /* GameOverPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327478B427AE5C3F0094EF40 /* GameOverPopup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		322F5D3127AB2EF0007D3021 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3258C6D027AD6A4A005C3461 /* MenuPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUp.swift; sourceTree = "<group>"; };
 		327478B127AE4CDE0094EF40 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		327478B427AE5C3F0094EF40 /* GameOverPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		322F5D1627AB0C5F007D3021 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				327478B327AE5C260094EF40 /* GameOver */,
 				322F5D1A27AB0DCC007D3021 /* Game */,
 				322F5D1927AB0DB9007D3021 /* Menu */,
 				322F5D1827AB0D7B007D3021 /* Start */,
@@ -174,6 +177,14 @@
 				327478B127AE4CDE0094EF40 /* CustomButton.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		327478B327AE5C260094EF40 /* GameOver */ = {
+			isa = PBXGroup;
+			children = (
+				327478B427AE5C3F0094EF40 /* GameOverPopup.swift */,
+			);
+			path = GameOver;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +265,7 @@
 				322F5D0427AB0BBA007D3021 /* StartViewController.swift in Sources */,
 				322F5D2427AB1BED007D3021 /* Game.swift in Sources */,
 				322F5D2727AB2252007D3021 /* String+localized .swift in Sources */,
+				327478B527AE5C3F0094EF40 /* GameOverPopup.swift in Sources */,
 				322F5D3227AB2EF0007D3021 /* Constants.swift in Sources */,
 				3258C6D127AD6A4A005C3461 /* MenuPopUp.swift in Sources */,
 				322F5D2027AB10A0007D3021 /* Card.swift in Sources */,

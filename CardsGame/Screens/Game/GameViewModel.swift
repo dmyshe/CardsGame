@@ -4,6 +4,7 @@ protocol GameViewModelDelegate: AnyObject {
     func reloadData()
     func cardFlipDown()
     func removeCard()
+    func showGameOverPopup()
 }
 
 class GameViewModel {
@@ -55,7 +56,7 @@ class GameViewModel {
             createNewRound()
             delegate?.reloadData()
         } else {
-            print("end")
+            delegate?.showGameOverPopup()
         }
     }
  
