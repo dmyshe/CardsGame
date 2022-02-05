@@ -138,16 +138,10 @@ extension  GameViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: GameViewModelDelegate
 extension GameViewController: GameViewModelDelegate {
-    
-    func restartLevel() {
-        self.spinner.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.collectionView.reloadData()
-        }
-    }
-    
+ 
     func showGameOverPopup() {
         let controller = GameOverPopup()
+        controller.delegate = self
         view.addSubview(controller)
     }
     
@@ -184,7 +178,6 @@ extension GameViewController: GameViewModelDelegate {
             cardTwoCell.remove()
         }
     }
-    
 }
 
 // MARK: MenuPopUpDelegate
@@ -195,3 +188,9 @@ extension GameViewController: MenuPopUpDelegate {
     }
 }
 
+// MARK: GameOverPopupDelegate
+extension GameViewController: GameOverPopupDelegate {
+    func popToStartViewController() {
+        navigationController?.popViewController(animated: true)
+    }
+}

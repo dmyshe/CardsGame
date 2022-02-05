@@ -5,7 +5,6 @@ protocol GameViewModelDelegate: AnyObject {
     func cardFlipDown()
     func removeCard()
     func showGameOverPopup()
-    func restartLevel() 
 }
 
 class GameViewModel {

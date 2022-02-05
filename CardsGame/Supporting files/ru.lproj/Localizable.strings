@@ -5,5 +5,5 @@
 "restart_text" = "Начать заново";
 "menu_text" = "Меню";
 "cards_title" = "CARDS";
-"congratulations_text" = "Уууу! Ты выиграл игру! 😎";
+"congratulations_text" = "Ты победил 😎";
 "backToStartController" = "Вернуться назад на главный экран";

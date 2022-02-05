@@ -1,9 +1,13 @@
 import Foundation
 import UIKit
 
+protocol GameOverPopupDelegate: AnyObject {
+    func popToStartViewController()
+}
+
 class GameOverPopup: UIView {
     
-    var viewModel = GameViewModel()
+    weak var delegate: GameOverPopupDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -54,6 +58,7 @@ class GameOverPopup: UIView {
     
     @objc func backToStartController() {
         animateOut()
+        delegate?.popToStartViewController()
     }
 
     private func animateOut() {
