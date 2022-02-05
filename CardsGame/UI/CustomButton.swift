@@ -11,7 +11,7 @@ class CustomButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func configure(title: String) {
+    private func configure(title: String) {
         var config = UIButton.Configuration.plain()
         config.title = title
         config.baseForegroundColor = .black
