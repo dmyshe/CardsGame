@@ -105,8 +105,6 @@ class GameOverPopup: UIView {
             
             titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.UI.Layout.defaultPadding),
             titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant:  Constants.UI.Layout.defaultOffset),
-            titleLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  Constants.UI.Layout.defaultOffset),
             
             buttonStack.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             buttonStack.centerYAnchor.constraint(equalTo: container.centerYAnchor),
