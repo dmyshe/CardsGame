@@ -15,25 +15,11 @@ class StartViewController: UIViewController {
         setupUserInterface()
         makeConstraints()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-    }
+
     
     @objc private func tapPlayButton() {
         let controller = GameViewController()
-
-         let transition = pushUpViewControllerFromBottom()
-         self.navigationController?.view.layer.add(transition, forKey: nil)
          self.navigationController?.pushViewController(controller, animated: false)
-    }
-    
-    private func pushUpViewControllerFromBottom() -> CATransition {
-        let transition = CATransition()
-        transition.duration = 0.4
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.moveIn
-        transition.subtype = CATransitionSubtype.fromTop
-        return transition
     }
     
     private func setupUserInterface() {
