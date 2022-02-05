@@ -16,7 +16,7 @@ class CardCollectionViewCell: UICollectionViewCell {
 
     private lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "back")
+        imageView.image = Constants.UI.Image.backImage
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -39,22 +39,21 @@ class CardCollectionViewCell: UICollectionViewCell {
         if card.isMatched  {
             backImageView.alpha = 0
             frontImageView.alpha = 0
-            return
         } else {
             backImageView.alpha = 1
             frontImageView.alpha = 1
         }
 
-        if card.isFlipped  {
-            flipUp(speed: 0)
-        } else {
-            flipDown(speed: 0, delay: 0)
-        }
+        card.isFlipped ? flipUp(speed: 0) : flipDown(speed: 0, delay: 0)
     }
     
     func flipUp(speed: TimeInterval = 0.3) {
 
-        UIView.transition(from: backImageView, to: frontImageView, duration: speed, options: [.showHideTransitionViews,.transitionFlipFromLeft], completion: nil)
+        UIView.transition(from: backImageView,
+                          to: frontImageView,
+                          duration: speed,
+                          options: [.showHideTransitionViews,.transitionFlipFromLeft],
+                          completion: nil)
 
         card?.isFlipped = true
     }

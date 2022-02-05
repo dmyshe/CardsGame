@@ -18,7 +18,7 @@ struct Constants {
         }
         
         struct Image {
-            static let back = UIImage(named: "back")
+            static let backImage = UIImage(named: "back")
             
             static let leftArrow: UIImage = {
                 let image = UIImage(systemName: "arrow.left" ,withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))!.withTintColor(.black, renderingMode: .alwaysOriginal)

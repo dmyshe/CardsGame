@@ -4,7 +4,7 @@ import UIKit
 
 
 extension UIButton {
-    func configure(title: String, image: UIImage? = nil) {
+    func configure(title: String) {
         var config = UIButton.Configuration.plain()
         config.title = title
         config.baseForegroundColor = .black

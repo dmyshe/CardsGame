@@ -1,8 +1,6 @@
 import Foundation
 import UIKit
 
-
-
 class MenuPopUp: UIView {
     
     var viewModel = GameViewModel()

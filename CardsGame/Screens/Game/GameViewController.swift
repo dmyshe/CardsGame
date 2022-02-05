@@ -55,7 +55,7 @@ class GameViewController: UIViewController {
             self.spinner.hidesWhenStopped = true
             self.spinner.stopAnimating()
             self.collectionView.isHidden = false
-            self.title = "\(self.viewModel.game.round)/3"
+            self.title = self.viewModel.setTitle
             self.navigationItem.rightBarButtonItem = self.settingsButton
         }
     }
@@ -137,6 +137,7 @@ extension GameViewController: GameViewModelDelegate {
     
     func reloadData() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.title = self.viewModel.setTitle
             self.collectionView.reloadData()
         }
     }

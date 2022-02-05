@@ -15,18 +15,23 @@ class GameViewModel {
     var game = Game()
     var firstFlippedCardIndex: Int?
     var secondFlippedCardIndex: Int?
-   
+    var setTitle: String {
+        "\(self.game.round)/3"
+    }
+    
     func createNewRound() {
         game.cardsArray = generateCards(with: game.numberOfCards)
         game.cardsArray.shuffle()
     }
     
     func checkForMatch(_ secondFlippedCardIndex: Int) {
-        guard let firstFlippedCardIndex = firstFlippedCardIndex else { return }
+        guard let firstFlippedCard = firstFlippedCardIndex else { return }
+        self.secondFlippedCardIndex = secondFlippedCardIndex
+        guard let secondFlippedCard = self.secondFlippedCardIndex else { return }
 
-        let cardOne = game.cardsArray[firstFlippedCardIndex]
-        let cardTwo = game.cardsArray[secondFlippedCardIndex]
-
+        let cardOne = game.cardsArray[firstFlippedCard]
+        let cardTwo = game.cardsArray[secondFlippedCard]
+        
         if cardOne.imageName == cardTwo.imageName {
             cardOne.isMatched = true
             cardTwo.isMatched = true
@@ -41,7 +46,6 @@ class GameViewModel {
             cardOne.isFlipped = false
             cardTwo.isFlipped = false
             delegate?.cardFlipDown()
-
         }
         self.firstFlippedCardIndex = nil
     }

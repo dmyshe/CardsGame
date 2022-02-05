@@ -3,15 +3,6 @@ import UIKit
 class StartViewController: UIViewController {
     
     // MARK: Views
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = LocalizeStrings.MenuPopUP.menu
-        label.textColor = Constants.UI.Color.customYellow
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private lazy var playGameButton:  UIButton = {
         let button = UIButton()
         button.configure(title: LocalizeStrings.StartViewController.play)
@@ -48,7 +39,6 @@ class StartViewController: UIViewController {
     
     private func setupUserInterface() {
         view.backgroundColor = .systemGray6
-        view.addSubview(titleLabel)
         view.addSubview(playGameButton)
     }
     
@@ -59,11 +49,6 @@ class StartViewController: UIViewController {
             playGameButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.UI.Layout.padding),
             playGameButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.UI.Layout.padding),
             playGameButton.heightAnchor.constraint(equalToConstant: Constants.UI.Layout.buttonHeight),
-            
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.UI.Layout.defaultPadding),
-            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.UI.Layout.padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.UI.Layout.padding),
         ])
     }
 }
