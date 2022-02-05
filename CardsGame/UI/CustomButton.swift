@@ -1,9 +1,16 @@
 import Foundation
 import UIKit
 
-
-
-extension UIButton {
+class CustomButton: UIButton {
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        configure(title: title)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     func configure(title: String) {
         var config = UIButton.Configuration.plain()
         config.title = title
@@ -16,5 +23,4 @@ extension UIButton {
         self.setTitleColor(.black, for: .normal)
         
     }
-    
 }

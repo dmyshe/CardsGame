@@ -3,9 +3,9 @@ import UIKit
 class StartViewController: UIViewController {
     
     // MARK: Views
-    private lazy var playGameButton:  UIButton = {
-        let button = UIButton()
-        button.configure(title: LocalizeStrings.StartViewController.play)
+    private lazy var playGameButton:  CustomButton = {
+        let button = CustomButton(title: LocalizeStrings.StartViewController.play)
+//        button.configure(title: LocalizeStrings.StartViewController.play)
         button.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

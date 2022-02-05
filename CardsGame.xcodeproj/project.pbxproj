@@ -20,8 +20,8 @@
 		322F5D2B27AB244E007D3021 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 322F5D2D27AB244E007D3021 /* Localizable.strings */; };
 		322F5D3027AB247A007D3021 /* LocalizeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F5D2F27AB247A007D3021 /* LocalizeString.swift */; };
 		322F5D3227AB2EF0007D3021 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F5D3127AB2EF0007D3021 /* Constants.swift */; };
-		3258C6CE27AD5A69005C3461 /* UIButton + configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3258C6CD27AD5A69005C3461 /* UIButton + configure.swift */; };
 		3258C6D127AD6A4A005C3461 /* MenuPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3258C6D027AD6A4A005C3461 /* MenuPopUp.swift */; };
+		327478B227AE4CDE0094EF40 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327478B127AE4CDE0094EF40 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +42,8 @@
 		322F5D2E27AB2453007D3021 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		322F5D2F27AB247A007D3021 /* LocalizeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizeString.swift; sourceTree = "<group>"; };
 		322F5D3127AB2EF0007D3021 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3258C6CD27AD5A69005C3461 /* UIButton + configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + configure.swift"; sourceTree = "<group>"; };
 		3258C6D027AD6A4A005C3461 /* MenuPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUp.swift; sourceTree = "<group>"; };
+		327478B127AE4CDE0094EF40 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,17 +171,9 @@
 		3258C6CB27AD4329005C3461 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3258C6CC27AD433E005C3461 /* Extension */,
+				327478B127AE4CDE0094EF40 /* CustomButton.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		3258C6CC27AD433E005C3461 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				3258C6CD27AD5A69005C3461 /* UIButton + configure.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,10 +248,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				327478B227AE4CDE0094EF40 /* CustomButton.swift in Sources */,
 				322F5D3027AB247A007D3021 /* LocalizeString.swift in Sources */,
 				322F5D1E27AB1036007D3021 /* GameViewModel.swift in Sources */,
 				322F5D0427AB0BBA007D3021 /* StartViewController.swift in Sources */,
-				3258C6CE27AD5A69005C3461 /* UIButton + configure.swift in Sources */,
 				322F5D2427AB1BED007D3021 /* Game.swift in Sources */,
 				322F5D2727AB2252007D3021 /* String+localized .swift in Sources */,
 				322F5D3227AB2EF0007D3021 /* Constants.swift in Sources */,

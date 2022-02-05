@@ -15,16 +15,14 @@ class MenuPopUp: UIView {
     }()
     
     private lazy var continueButton:  UIButton = {
-        let button = UIButton()
-        button.configure(title: LocalizeStrings.MenuPopUP.continueText)
+        let button = CustomButton(title: LocalizeStrings.MenuPopUP.continueText)
         button.addTarget(self, action: #selector(continueGame), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var restartButton:  UIButton = {
-        let button = UIButton()
-        button.configure(title: LocalizeStrings.MenuPopUP.restart)
+        let button = CustomButton(title: LocalizeStrings.MenuPopUP.restart)
         button.addTarget(self, action: #selector(restartRound), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
