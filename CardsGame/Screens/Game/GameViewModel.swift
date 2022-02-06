@@ -2,8 +2,8 @@ import Foundation
 
 protocol GameViewModelDelegate: AnyObject {
     func reloadData()
-    func cardFlipDown()
-    func removeCard()
+    func flipDownCard(at firstIndex: Int, and secondIndex: Int)
+    func removeCard(at firstIndex: Int, and secondIndex: Int )
     func showGameOverPopup()
 }
 
@@ -24,16 +24,16 @@ class GameViewModel {
     }
     
     func checkForMatch() {
-        guard let firstFlippedCard = firstFlippedCardIndex else { return }
-        guard let secondFlippedCard = secondFlippedCardIndex else { return }
+        guard let firstFlippedCardIndex = firstFlippedCardIndex else { return }
+        guard let secondFlippedCardIndex = secondFlippedCardIndex else { return }
 
-        let cardOne = game.cardsArray[firstFlippedCard]
-        let cardTwo = game.cardsArray[secondFlippedCard]
+        let cardOne = game.cardsArray[firstFlippedCardIndex]
+        let cardTwo = game.cardsArray[secondFlippedCardIndex]
         
         if cardOne.imageName == cardTwo.imageName {
             cardOne.isMatched = true
             cardTwo.isMatched = true
-            delegate?.removeCard()
+            delegate?.removeCard(at: firstFlippedCardIndex, and: secondFlippedCardIndex)
 
             let remainedCards = game.cardsArray.filter { !$0.isMatched }
             if remainedCards.isEmpty {
@@ -42,13 +42,13 @@ class GameViewModel {
         } else {
             cardOne.isFlipped = false
             cardTwo.isFlipped = false
-            delegate?.cardFlipDown()
+            delegate?.flipDownCard(at: firstFlippedCardIndex,and: secondFlippedCardIndex)
             self.firstFlippedCardIndex = nil
             self.secondFlippedCardIndex = nil
         }
     }
 
-    func checkForGameOver() {
+   private func checkForGameOver() {
         if  game.round < 3 {
             game.round += 1
             game.numberOfCards += 1

@@ -9,7 +9,9 @@ class GameViewController: UIViewController {
     // MARK: Views
     private lazy var spinner: UIActivityIndicatorView = {
         let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.style = .large
         activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicatorView
     }()
     
@@ -49,7 +51,6 @@ class GameViewController: UIViewController {
         makeConstraints()
         viewModel.createNewRound()
         viewModel.delegate = self
-        spinner.style = .large
         spinner.startAnimating()
     }
     
@@ -80,7 +81,6 @@ class GameViewController: UIViewController {
     }
     
     private func makeConstraints() {
-        spinner.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -157,22 +157,18 @@ extension GameViewController: GameViewModelDelegate {
         }
     }
     
-    func cardFlipDown() {
-        if let  firstFlippedCardIndex = viewModel.firstFlippedCardIndex,
-           let secondFlippedCardIndex = viewModel.secondFlippedCardIndex,
-           let cardOneCell = collectionView.cellForItem(at: IndexPath(row: firstFlippedCardIndex, section: 0)) as? CardCollectionViewCell,
-           let cardTwoCell = collectionView.cellForItem(at: IndexPath(row: secondFlippedCardIndex, section: 0)) as? CardCollectionViewCell {
+    func flipDownCard(at firstIndex: Int, and secondIndex: Int) {
+        if let cardOneCell = collectionView.cellForItem(at: IndexPath(row: firstIndex, section: 0)) as? CardCollectionViewCell,
+           let cardTwoCell = collectionView.cellForItem(at: IndexPath(row: secondIndex, section: 0)) as? CardCollectionViewCell {
             
             cardOneCell.flipDown()
             cardTwoCell.flipDown()
         }
     }
     
-    func removeCard() {
-        if let  firstFlippedCardIndex = viewModel.firstFlippedCardIndex,
-           let secondFlippedCardIndex = viewModel.secondFlippedCardIndex,
-           let cardOneCell = collectionView.cellForItem(at: IndexPath(row: firstFlippedCardIndex, section: 0)) as? CardCollectionViewCell,
-           let cardTwoCell = collectionView.cellForItem(at: IndexPath(row: secondFlippedCardIndex, section: 0)) as? CardCollectionViewCell {
+    func removeCard(at firstIndex: Int, and secondIndex: Int) {
+        if let cardOneCell = collectionView.cellForItem(at: IndexPath(row: firstIndex, section: 0)) as? CardCollectionViewCell,
+           let cardTwoCell = collectionView.cellForItem(at: IndexPath(row: secondIndex, section: 0)) as? CardCollectionViewCell {
             
             cardOneCell.remove()
             cardTwoCell.remove()
