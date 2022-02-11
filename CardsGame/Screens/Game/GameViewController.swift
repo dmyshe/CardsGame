@@ -118,12 +118,7 @@ extension GameViewController: UICollectionViewDelegate {
         if cell?.card?.isFlipped == false && cell?.card?.isMatched == false {
             cell?.flipUp()
             
-            if viewModel.firstFlippedCardIndex == nil {
-                viewModel.firstFlippedCardIndex = indexPath.row
-            } else {
-                viewModel.secondFlippedCardIndex = indexPath.row
-                viewModel.checkForMatch()
-            }
+            viewModel.getFlippedCardIndex(at: indexPath.row)
         }
     }
 }

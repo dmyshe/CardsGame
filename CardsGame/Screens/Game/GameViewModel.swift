@@ -12,8 +12,8 @@ class GameViewModel {
     weak var delegate: GameViewModelDelegate?
     
     var game = Game()
-    var firstFlippedCardIndex: Int?
-    var secondFlippedCardIndex: Int?
+    private var firstFlippedCardIndex: Int?
+    private var secondFlippedCardIndex: Int?
     var setTitle: String {
         "\(self.game.round)/3"
     }
@@ -23,7 +23,16 @@ class GameViewModel {
         game.cardsArray.shuffle()
     }
     
-    func checkForMatch() {
+    func getFlippedCardIndex(at indexPath: Int) {
+        if firstFlippedCardIndex == nil {
+            firstFlippedCardIndex = indexPath
+        } else {
+            secondFlippedCardIndex = indexPath
+            checkForMatch()
+        }
+    }
+    
+   private func checkForMatch() {
         guard let firstFlippedCardIndex = firstFlippedCardIndex else { return }
         guard let secondFlippedCardIndex = secondFlippedCardIndex else { return }
 
