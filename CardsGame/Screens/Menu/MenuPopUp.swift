@@ -14,21 +14,18 @@ class MenuPopUp: UIView {
         label.text = LocalizeStrings.MenuPopUP.menu
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var continueButton:  UIButton = {
         let button = CustomButton(title: LocalizeStrings.MenuPopUP.continueText)
         button.addTarget(self, action: #selector(continueGame), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var restartButton:  UIButton = {
         let button = CustomButton(title: LocalizeStrings.MenuPopUP.restart)
         button.addTarget(self, action: #selector(restartRound), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -36,7 +33,6 @@ class MenuPopUp: UIView {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 24
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -45,7 +41,6 @@ class MenuPopUp: UIView {
         stack.spacing = Constants.UI.Layout.defaultPadding
         stack.axis = .vertical
         stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -101,9 +96,9 @@ class MenuPopUp: UIView {
     }
     
     private func setupUserInterface() {
-        addSubview(container)
-        container.addSubview(buttonStack)
-        container.addSubview(titleLabel)
+        addSubviewForAutoLayout(container)
+        container.addSubviewForAutoLayout(buttonStack)
+        container.addSubviewForAutoLayout(titleLabel)
     }
     
     private func makeConstraints() {

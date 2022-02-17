@@ -6,7 +6,6 @@ class StartViewController: UIViewController {
     private lazy var playGameButton:  CustomButton = {
         let button = CustomButton(title: LocalizeStrings.StartViewController.play)
         button.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -24,7 +23,7 @@ class StartViewController: UIViewController {
     
     private func setupUserInterface() {
         view.backgroundColor = .systemGray6
-        view.addSubview(playGameButton)
+        view.addSubviewForAutoLayout(playGameButton)
     }
     
     private func makeConstraints() {

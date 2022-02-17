@@ -11,7 +11,6 @@ class GameViewController: UIViewController {
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.style = .large
         activityIndicatorView.hidesWhenStopped = true
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicatorView
     }()
     
@@ -41,7 +40,6 @@ class GameViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGray6
         collectionView.register(CardCollectionViewCell.self, forCellWithReuseIdentifier: CardCollectionViewCell.identifier)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
@@ -76,8 +74,8 @@ class GameViewController: UIViewController {
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = nil
         
-        view.addSubview(spinner)
-        view.addSubview(collectionView)
+        view.addSubviewForAutoLayout(spinner)
+        view.addSubviewForAutoLayout(collectionView)
     }
     
     private func makeConstraints() {

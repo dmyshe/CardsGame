@@ -10,7 +10,6 @@ class CardCollectionViewCell: UICollectionViewCell {
     private lazy var frontImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
@@ -18,7 +17,6 @@ class CardCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = Constants.UI.Image.backImage
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
@@ -78,12 +76,12 @@ class CardCollectionViewCell: UICollectionViewCell {
         }, completion: nil)
     }
     
-    func setupUserInterface() {
-        addSubview(frontImageView)
-        addSubview(backImageView)
+    private func setupUserInterface() {
+        addSubviewForAutoLayout(frontImageView)
+        addSubviewForAutoLayout(backImageView)
     }
     
-    func makeConstraints() {
+   private func makeConstraints() {
         NSLayoutConstraint.activate([
             frontImageView.heightAnchor.constraint(equalToConstant: contentView.bounds.size.height),
             frontImageView.widthAnchor.constraint(equalToConstant: contentView.bounds.size.width),

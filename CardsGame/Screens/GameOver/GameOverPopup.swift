@@ -15,14 +15,12 @@ class GameOverPopup: UIView {
         label.textColor = .black
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var backButton:  UIButton = {
         let button = CustomButton(title: LocalizeStrings.GameOverPopup.backToStartController)
         button.addTarget(self, action: #selector(backToStartController), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -30,7 +28,6 @@ class GameOverPopup: UIView {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 24
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -39,7 +36,6 @@ class GameOverPopup: UIView {
         stack.spacing = Constants.UI.Layout.defaultPadding
         stack.axis = .vertical
         stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -91,9 +87,9 @@ class GameOverPopup: UIView {
     }
     
     private func setupUserInterface() {
-        addSubview(container)
-        container.addSubview(buttonStack)
-        container.addSubview(titleLabel)
+        addSubviewForAutoLayout(container)
+        container.addSubviewForAutoLayout(buttonStack)
+        container.addSubviewForAutoLayout(titleLabel)
     }
     
     private func makeConstraints() {
