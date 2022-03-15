@@ -14,7 +14,6 @@ struct Constants {
             static let buttonHeight: CGFloat = 50
             static let collectionViewCellHeight: CGFloat = 120
             static let collectionViewCellWidth: CGFloat = 120
-            
         }
         
         struct Image {
@@ -24,6 +23,7 @@ struct Constants {
                 let image = UIImage(systemName: "arrow.left" ,withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))!.withTintColor(.black, renderingMode: .alwaysOriginal)
                 return image
             }()
+            
             static let gear: UIImage = {
                 let image = UIImage(systemName: "gear" ,withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))!.withTintColor(.black, renderingMode: .alwaysOriginal)
                 return image

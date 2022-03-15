@@ -9,6 +9,7 @@ class GameOverPopup: UIView {
     
     weak var delegate: GameOverPopupDelegate?
     
+    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = LocalizeStrings.GameOverPopup.congratulations

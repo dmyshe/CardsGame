@@ -6,7 +6,7 @@ class GameViewController: UIViewController {
     
     var viewModel = GameViewModel()
     
-    // MARK: Views
+    // MARK: - Views
     private lazy var spinner: UIActivityIndicatorView = {
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.style = .large
@@ -91,7 +91,7 @@ class GameViewController: UIViewController {
     }
 }
 
-// MARK: UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 extension GameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.game.cardsArray.count
@@ -107,7 +107,7 @@ extension GameViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
 extension GameViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -121,7 +121,7 @@ extension GameViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 extension  GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: Constants.UI.Layout.collectionViewCellWidth,
@@ -129,7 +129,7 @@ extension  GameViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: GameViewModelDelegate
+// MARK: - GameViewModelDelegate
 extension GameViewController: GameViewModelDelegate {
  
     func showGameOverPopup() {
@@ -169,7 +169,7 @@ extension GameViewController: GameViewModelDelegate {
     }
 }
 
-// MARK: MenuPopUpDelegate
+// MARK: - MenuPopUpDelegate
 extension GameViewController: MenuPopUpDelegate {
     func restartRound() {
         viewModel.createNewRound()
@@ -177,7 +177,7 @@ extension GameViewController: MenuPopUpDelegate {
     }
 }
 
-// MARK: GameOverPopupDelegate
+// MARK: - GameOverPopupDelegate
 extension GameViewController: GameOverPopupDelegate {
     func popToStartViewController() {
         navigationController?.popViewController(animated: true)

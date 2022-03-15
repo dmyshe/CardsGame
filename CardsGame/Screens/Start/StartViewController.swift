@@ -2,7 +2,7 @@ import UIKit
 
 class StartViewController: UIViewController {
     
-    // MARK: Views
+    // MARK: - Views
     private lazy var playGameButton:  CustomButton = {
         let button = CustomButton(title: LocalizeStrings.StartViewController.play)
         button.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
@@ -15,7 +15,6 @@ class StartViewController: UIViewController {
         makeConstraints()
     }
 
-    
     @objc private func tapPlayButton() {
         let controller = GameViewController()
          self.navigationController?.pushViewController(controller, animated: false)
