@@ -6,7 +6,7 @@ class CardCollectionViewCell: UICollectionViewCell {
     static let identifier = "CardCollectionViewCell"
     var card: Card?
   
-    // MARK: Views
+    // MARK: - Views
     private lazy var frontImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
