@@ -30,7 +30,7 @@ class CardCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(card:Card) {
+    func configureCell(with card:Card) {
         self.card = card
         frontImageView.image = UIImage(named: card.imageName)
         
